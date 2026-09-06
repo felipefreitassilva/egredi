@@ -1,7 +1,12 @@
 import { Pool } from "pg";
 import type { ImportResult } from "./types";
 
-const url = process.env.DATABASE_URL;
+// Vercel Postgres / Neon integrations inject the connstring under different
+// names depending on vintage; DATABASE_URL is what we set by hand locally.
+const url =
+  process.env.DATABASE_URL ||
+  process.env.POSTGRES_URL ||
+  process.env.POSTGRES_PRISMA_URL;
 export const dbEnabled = Boolean(url);
 
 let pool: Pool | null = null;

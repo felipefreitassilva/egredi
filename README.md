@@ -44,7 +44,8 @@ o mesmo DDL, para rodar à mão se preferir).
 
 1. `git push` para o repositório.
 2. Vercel → **New Project** → importar o repo. Next é detectado, sem config.
-3. Adicionar um **Vercel Postgres** ao projeto (injeta `DATABASE_URL`).
+3. Aba **Storage** → criar um **Postgres** (Neon) e conectar ao projeto — injeta
+   `DATABASE_URL`/`POSTGRES_URL` (o `db.ts` aceita os dois).
 4. Definir as env vars: `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET`,
    `SESSION_SECRET`, e `LINKEDIN_REDIRECT_URI=https://<dominio>/api/auth/callback`.
 5. No LinkedIn, adicionar `https://<dominio>/api/auth/callback` aos redirect URLs.
@@ -58,8 +59,6 @@ o mesmo DDL, para rodar à mão se preferir).
 - Persistência: um registro por usuário (`sub` do LinkedIn) com `import_json`
   (jsonb). Um novo import substitui o anterior.
 - **Apagar meus dados** (no dashboard) remove o registro e desloga.
-- `legacy/` — o demo Node original de um arquivo, sem dependências. Ponto de
-  partida deste app; mantido como referência.
 
 ## Rotas
 
