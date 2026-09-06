@@ -49,7 +49,7 @@ export async function GET(req: Request) {
     } catch (e) {
       console.error("upsertLogin", e);
     }
-    const res = NextResponse.redirect(new URL("/", url.origin));
+    const res = NextResponse.redirect(new URL("/dashboard", url.origin));
     res.cookies.set(SESSION_COOKIE, token, { ...baseCookie, maxAge: 3600 });
     res.cookies.set(STATE_COOKIE, "", { ...baseCookie, maxAge: 0 });
     return res;

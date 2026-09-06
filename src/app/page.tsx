@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { SignInButton } from "@/components/SignInButton";
 import { getSession } from "@/lib/session";
 
@@ -8,6 +9,7 @@ export default async function Home({
   searchParams: Promise<{ error?: string }>;
 }) {
   const [session, params] = await Promise.all([getSession(), searchParams]);
+  if (session) redirect("/dashboard");
 
   return (
     <main className="grid min-h-dvh place-items-center p-6">
@@ -21,18 +23,7 @@ export default async function Home({
           </p>
         ) : null}
 
-        {session ? (
-          <div className="flex flex-col items-center gap-2 text-sm">
-            <span className="text-muted">
-              Logado como {session.name} ({session.email})
-            </span>
-            <a className="text-linkedin hover:underline" href="/api/auth/logout">
-              Sair
-            </a>
-          </div>
-        ) : (
-          <SignInButton />
-        )}
+        <SignInButton />
       </div>
     </main>
   );
