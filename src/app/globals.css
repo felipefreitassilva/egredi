@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --muted: #64748b;
+  --brand-1: #315881;
+  --brand-2: #3d7baa;
+  --linkedin: #0a66c2;
+  --linkedin-hover: #004182;
+  --danger: #b00020;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0b1220;
+    --foreground: #e6edf5;
+    --card: #111a2b;
+    --border: #1e293b;
+    --muted: #94a3b8;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-brand-1: var(--brand-1);
+  --color-brand-2: var(--brand-2);
+  --color-linkedin: var(--linkedin);
+  --color-linkedin-hover: var(--linkedin-hover);
+  --color-danger: var(--danger);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
