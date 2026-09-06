@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { redirectUri } from "@/lib/config";
+import { upsertLogin } from "@/lib/db";
 import { exchangeCode, fetchUserinfo } from "@/lib/linkedin";
 import {
   SESSION_COOKIE,
@@ -38,6 +39,16 @@ export async function GET(req: Request) {
       picture: u.picture,
       iat: Date.now(),
     });
+    try {
+      await upsertLogin({
+        sub: u.sub,
+        name: u.name,
+        email: u.email,
+        picture: u.picture,
+      });
+    } catch (e) {
+      console.error("upsertLogin", e);
+    }
     const res = NextResponse.redirect(new URL("/", url.origin));
     res.cookies.set(SESSION_COOKIE, token, { ...baseCookie, maxAge: 3600 });
     res.cookies.set(STATE_COOKIE, "", { ...baseCookie, maxAge: 0 });
